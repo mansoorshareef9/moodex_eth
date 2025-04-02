@@ -3,7 +3,7 @@ import { WagmiConfig, createConfig, configureChains } from 'wagmi';
 import { ConnectKitProvider, ConnectKitButton, getDefaultConfig } from 'connectkit';
 import { publicProvider } from 'wagmi/providers/public';
 import { Chain } from 'wagmi';
-import { bsc } from 'wagmi/chains';
+import { mainnet } from 'wagmi/chains';
 import { useEffect, useState } from 'react';
 import { AppProps } from 'next/app';
 import styles from './Price/Form.module.css';
@@ -13,13 +13,13 @@ import { jsonRpcProvider } from 'wagmi/providers/jsonRpc';
 const ethers = require('ethers');
 
 
-// Configure only the Polygon chain
+// Configure only the ethereum chain
 const { chains, publicClient, webSocketPublicClient } = configureChains(
-  [bsc], 
+  [mainnet], 
   [
     jsonRpcProvider({
       rpc: () => ({
-        http: 'https://bsc-dataseed3.binance.org', // ✅ OR use Ankr with API key if needed
+        http: 'https://eth.llamarpc.com', // ✅ OR use Ankr with API key if needed
       }),
     }),
   ]
@@ -37,7 +37,7 @@ const config = createConfig(
     appName: "MooDeX",
 
     // Optional
-    appDescription: "MooDeX",
+    appDescription: "MooDeX on Ethereum",
 
     // Configure chains
     chains,
