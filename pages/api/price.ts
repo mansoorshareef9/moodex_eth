@@ -12,7 +12,7 @@ export default async function handler(
 ) {
   const query = qs.stringify(req.query);
   const response = await fetch(
-    `https://bsc.api.0x.org/swap/v1/price?${query}`,
+    `https://api.0x.org/swap/v1/price?${query}`,
     {
       headers: {
         "0x-api-key": "d19a1155-ef1c-4f2e-88a1-a437b6615b42", // process.env.NEXT_PUBLIC_0X_API_KEY,
