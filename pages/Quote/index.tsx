@@ -1,8 +1,8 @@
 import useSWR from "swr";
 import Image from "next/image";
 import {
-  BSC_TOKENS_BY_SYMBOL,
-  BSC_TOKENS_BY_ADDRESS,
+  ETH_TOKENS_BY_SYMBOL,
+  ETH_TOKENS_BY_ADDRESS,
 } from "../../lib/constants";
 import { fetcher } from "../Price";
 import { useRouter } from 'next/router';
@@ -37,9 +37,9 @@ export default function QuoteView({
   setQuote: (price: any) => void;
   takerAddress: Address | undefined;
 }) {
-  const sellTokenInfo = BSC_TOKENS_BY_ADDRESS[price.sellTokenAddress.toLowerCase()];
-  const buyTokenInfo = BSC_TOKENS_BY_ADDRESS[price.buyTokenAddress.toLowerCase()];
-  const isNativeToken = sellTokenInfo.symbol.toLowerCase() === "bnb"; // Check if the sell token is BNB
+  const sellTokenInfo = ETH_TOKENS_BY_ADDRESS[price.sellTokenAddress.toLowerCase()];
+  const buyTokenInfo = ETH_TOKENS_BY_ADDRESS[price.buyTokenAddress.toLowerCase()];
+  const isNativeToken = sellTokenInfo.symbol.toLowerCase() === "eth"; // Check if the sell token is eth
 
   // Fetch quote here
   const { address } = useAccount();
@@ -71,7 +71,7 @@ export default function QuoteView({
   const config = isNativeToken
     ? {
         to: quote?.to,  // 0x Exchange Proxy contract address
-        value: quote?.sellAmount ? BigInt(quote.sellAmount) : undefined, // Set the BNB value
+        value: quote?.sellAmount ? BigInt(quote.sellAmount) : undefined, // Set the eth value
         data: quote?.data, // This should contain the correct encoded function call for the swap
       }
     : {
@@ -212,7 +212,7 @@ export default function QuoteView({
       {transactionStatus === 'rejected' && 'Transaction was rejected by the user.'}
     </p>
     {(transactionStatus === 'pending' || transactionStatus === 'success') && transactionHash && (
-      <a href={`https://arbiscan.io/tx/${transactionHash}`} target="_blank" rel="noopener noreferrer" className="external-link">
+      <a href={`https://etherscan.io/tx/${transactionHash}`} target="_blank" rel="noopener noreferrer" className="external-link">
         Transaction Hash
       </a>
     )}
