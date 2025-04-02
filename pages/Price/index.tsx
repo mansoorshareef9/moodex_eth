@@ -17,9 +17,9 @@ import {
   type Address,
 } from "wagmi";
 import {
-  BSC_TOKENS,
-  BSC_TOKENS_BY_SYMBOL,
-  BSC_TOKENS_BY_ADDRESS,
+  ETH_TOKENS,
+  ETH_TOKENS_BY_SYMBOL,
+  ETH_TOKENS_BY_ADDRESS,
   MAX_ALLOWANCE,
   exchangeProxy,
 } from "../../lib/constants";
@@ -62,7 +62,7 @@ export default function PriceView({
   const [buyAmount, setBuyAmount] = useState("");
   const [tradeDirection, setTradeDirection] = useState("sell");
   const [sellToken, setSellToken] = useState("usdc");
-  const [buyToken, setBuyToken] = useState("wbnb");
+  const [buyToken, setBuyToken] = useState("usdt");
 
   const handleSellTokenChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setSellToken(e.target.value);
@@ -72,8 +72,8 @@ export default function PriceView({
     setBuyToken(e.target.value);
   };
 //  
-const selectedSellToken = BSC_TOKENS_BY_SYMBOL[sellToken.toLowerCase()];
-const selectedBuyToken = BSC_TOKENS_BY_SYMBOL[buyToken.toLowerCase()];
+const selectedSellToken = ETH_TOKENS_BY_SYMBOL[sellToken.toLowerCase()];
+const selectedBuyToken = ETH_TOKENS_BY_SYMBOL[buyToken.toLowerCase()];
 
   
 const { data: sellRawBalance, error: sellBalanceError } = useContractRead({
@@ -81,7 +81,7 @@ const { data: sellRawBalance, error: sellBalanceError } = useContractRead({
   abi: erc20ABI,
   functionName: "balanceOf",
   args: [takerAddress as `0x${string}`],
-  chainId: 56,
+  chainId: 1,
   enabled: !!takerAddress && !!selectedSellToken && !selectedSellToken.isNative,
 });
 
@@ -91,7 +91,7 @@ const { data: buyRawBalance, error: buyBalanceError  } = useContractRead({
   abi: erc20ABI,
   functionName: "balanceOf",
   args: [takerAddress as `0x${string}`],
-  chainId: 56,
+  chainId: 1,
   enabled: !!takerAddress && !!selectedBuyToken && !selectedBuyToken.isNative,
 });
 
@@ -105,21 +105,21 @@ const { data: buyRawBalance, error: buyBalanceError  } = useContractRead({
   //click on balance amount
   const handleBalanceClick = () => {
   if (sellRawBalance) {
-    const fullBalance = formatUnits(sellRawBalance, BSC_TOKENS_BY_SYMBOL[sellToken].decimals);
+    const fullBalance = formatUnits(sellRawBalance, ETH_TOKENS_BY_SYMBOL[sellToken].decimals);
     setSellAmount(fullBalance); 
   }
 };
-
+/*
   useEffect(() => {
   console.log("Sell Token:", sellToken);
-  console.log("Sell Token Address:", sellToken === "bnb" ? "native" : BSC_TOKENS_BY_SYMBOL[sellToken]?.address);
+  console.log("Sell Token Address:", sellToken === "eth" ? "native" : ETH_TOKENS_BY_SYMBOL[sellToken]?.address);
   console.log("Sell Token Balance Response:", sellRawBalance);
 }, [sellRawBalance, sellToken]);
 
   useEffect(() => {
   console.log("takerAddress:", takerAddress);
 }, [takerAddress]);
-
+*/
 
   const toggleTokens = () => {
     // Swap tokens and amounts
@@ -135,14 +135,14 @@ const { data: buyRawBalance, error: buyBalanceError  } = useContractRead({
     });
   };
 
-  const sellTokenDecimals = BSC_TOKENS_BY_SYMBOL[sellToken].decimals;
+  const sellTokenDecimals = ETH_TOKENS_BY_SYMBOL[sellToken].decimals;
 
   const parsedSellAmount =
     sellAmount && tradeDirection === "sell"
       ? parseUnits(sellAmount, sellTokenDecimals).toString()
       : undefined;
 
-  const buyTokenDecimals = BSC_TOKENS_BY_SYMBOL[buyToken].decimals;
+  const buyTokenDecimals = ETH_TOKENS_BY_SYMBOL[buyToken].decimals;
 
   const parsedBuyAmount =
     buyAmount && tradeDirection === "buy"
@@ -154,8 +154,8 @@ const { data: buyRawBalance, error: buyBalanceError  } = useContractRead({
     [
       "/api/price",
       {
-        sellToken: BSC_TOKENS_BY_SYMBOL[sellToken].address,
-        buyToken: BSC_TOKENS_BY_SYMBOL[buyToken].address,
+        sellToken: ETH_TOKENS_BY_SYMBOL[sellToken].address,
+        buyToken: ETH_TOKENS_BY_SYMBOL[buyToken].address,
         sellAmount: parsedSellAmount,
         buyAmount: parsedBuyAmount,
         takerAddress,
@@ -195,7 +195,7 @@ const formattedBuyTokenBalance = buyRawBalance? Number(formatUnits(buyRawBalance
           <img
             alt={sellToken}
             className={styles.tokenImage}
-            src={BSC_TOKENS_BY_SYMBOL[sellToken].logoURI}
+            src={ETH_TOKENS_BY_SYMBOL[sellToken].logoURI}
           />
           <div className="sm:w-full sm:mr-2">
             <select
@@ -205,7 +205,7 @@ const formattedBuyTokenBalance = buyRawBalance? Number(formatUnits(buyRawBalance
               className={styles.select}
               onChange={handleSellTokenChange}
             >
-              {BSC_TOKENS.map((token) => (
+              {ETH_TOKENS.map((token) => (
                 <option key={token.address} value={token.symbol.toLowerCase()}
                 disabled={token.symbol.toLowerCase() === buyToken}>
                   {token.symbol}
@@ -245,7 +245,7 @@ const formattedBuyTokenBalance = buyRawBalance? Number(formatUnits(buyRawBalance
           <img
             alt={buyToken}
             className={styles.tokenImage}
-            src={BSC_TOKENS_BY_SYMBOL[buyToken].logoURI}
+            src={ETH_TOKENS_BY_SYMBOL[buyToken].logoURI}
           />
           <div className="sm:w-full sm:mr-2">
             <select
@@ -255,7 +255,7 @@ const formattedBuyTokenBalance = buyRawBalance? Number(formatUnits(buyRawBalance
               className={styles.select}
               onChange={(e) => handleBuyTokenChange(e)}
             >
-              {BSC_TOKENS.map((token) => (
+              {ETH_TOKENS.map((token) => (
                 <option key={token.address} value={token.symbol.toLowerCase()}
                 disabled={token.symbol.toLowerCase() === sellToken}>
                   {token.symbol}
@@ -286,10 +286,10 @@ const formattedBuyTokenBalance = buyRawBalance? Number(formatUnits(buyRawBalance
         Number(
           formatUnits(
             BigInt(price.grossBuyAmount),
-            BSC_TOKENS_BY_SYMBOL[buyToken].decimals
+            ETH_TOKENS_BY_SYMBOL[buyToken].decimals
           )
         ) * AFFILIATE_FEE
-      ).toFixed(2)} ${BSC_TOKENS_BY_SYMBOL[buyToken].symbol}`
+      ).toFixed(2)} ${ETH_TOKENS_BY_SYMBOL[buyToken].symbol}`
     : null}
 </div>
 
@@ -297,7 +297,7 @@ const formattedBuyTokenBalance = buyRawBalance? Number(formatUnits(buyRawBalance
 
       {takerAddress ? (
         <ApproveOrReviewButton
-        sellTokenAddress={BSC_TOKENS_BY_SYMBOL[sellToken].address as `0x${string}`}
+        sellTokenAddress={ETH_TOKENS_BY_SYMBOL[sellToken].address as `0x${string}`}
         takerAddress={takerAddress}
         onClick={() => setFinalize(true)}
         disabled={disabled}
@@ -385,7 +385,7 @@ function ApproveOrReviewButton({
   sellRawBalance &&
   sellAmount &&
   !isNaN(Number(sellAmount)) &&
-  parseUnits(sellAmount, BSC_TOKENS_BY_SYMBOL[sellToken].decimals) <= BigInt(sellRawBalance) &&
+  parseUnits(sellAmount, ETH_TOKENS_BY_SYMBOL[sellToken].decimals) <= BigInt(sellRawBalance) &&
   (allowance === undefined || allowance === 0n || BigInt(allowance) < parsedSellAmount);
 
 
