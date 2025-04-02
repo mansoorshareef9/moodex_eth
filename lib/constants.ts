@@ -74,7 +74,7 @@ export const ETH_TOKENS = [
     name: "floki",
     symbol: "floki",
     chainId: 1,
-    address: "0xfb5c6815ca3ac72ce9f5006869ae67f18bf77006",
+    address: "0xcf0c122c6b73ff809c693db761e7baebe62b6a2e",
     decimals: 18,
     logoURI: "https://cryptologos.cc/logos/floki-inu-floki-logo.svg?v=040",
     isNative: false,
