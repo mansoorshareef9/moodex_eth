@@ -75,6 +75,18 @@ export default function PriceView({
 const selectedSellToken = ETH_TOKENS_BY_SYMBOL[sellToken.toLowerCase()];
 const selectedBuyToken = ETH_TOKENS_BY_SYMBOL[buyToken.toLowerCase()];
 
+//native token balance
+const { data: sellNativeBalance } = useBalance({
+  address: takerAddress,
+  chainId: 1, // or dynamically use selectedSellToken.chainId
+  enabled: !!takerAddress && selectedSellToken?.isNative,
+});
+
+const { data: buyNativeBalance } = useBalance({
+  address: takerAddress,
+  chainId: 1,
+  enabled: !!takerAddress && selectedBuyToken?.isNative,
+});
   
 const { data: sellRawBalance, error: sellBalanceError } = useContractRead({
   address: selectedSellToken?.address as `0x${string}`,
@@ -184,8 +196,8 @@ const disabled =
 
 
   // Format and round the balances to 1 decimal place
-const formattedSellTokenBalance = sellRawBalance? Number(formatUnits(sellRawBalance, selectedSellToken?.decimals ?? 18)).toFixed(2): "0.00";  
-const formattedBuyTokenBalance = buyRawBalance? Number(formatUnits(buyRawBalance, selectedBuyToken?.decimals ?? 18)).toFixed(2): "0.00";
+const formattedSellTokenBalance = selectedSellToken?.isNative ? sellNativeBalance ? Number(formatUnits(sellNativeBalance.value, selectedSellToken.decimals)).toFixed(2): "0.00" : sellRawBalance ? Number(formatUnits(sellRawBalance, selectedSellToken.decimals)).toFixed(2) : "0.00";
+const formattedBuyTokenBalance = selectedBuyToken?.isNative ? buyNativeBalance ? Number(formatUnits(buyNativeBalance.value, selectedBuyToken.decimals)).toFixed(2) : "0.00" : buyRawBalance ? Number(formatUnits(buyRawBalance, selectedBuyToken.decimals)).toFixed(2) : "0.00";
 
   return (
     <form className={styles.form}>
