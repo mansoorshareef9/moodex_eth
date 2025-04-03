@@ -89,14 +89,14 @@ export default function App({ Component, pageProps }: AppProps) {
             className={styles.polygonbutton}
             onClick={() => window.open('https://moodex.xyz', '_blank', 'noopener noreferrer')}
           >
-            MooDex on POLYGON
+             🟣 MooDex (Polygon)
           </button>
           {/* Add the MooDex on BSC button */}
           <button 
             className={styles.bscbutton}
             onClick={() => window.open('https://bsc.moodex.xyz', '_blank', 'noopener noreferrer')}
           >
-            MooDex on BSC
+            🟡 MooDex (BSC)
           </button>
           {/* Add the Revoke Permission button outside of the popup */}
           <button 
