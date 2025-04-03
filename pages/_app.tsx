@@ -78,7 +78,7 @@ export default function App({ Component, pageProps }: AppProps) {
           {/* Add MooDeX text in the top left */}
           <div className={styles.heading}>
             <span>MooDeX</span>
-            <span className={styles.subheading}>on ETHEREUM</span>
+            <span className={styles.subheading}>on ETH</span>
           </div>
           <div className={styles.connectwalletbutton}>
             <ConnectKitButton />
