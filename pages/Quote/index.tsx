@@ -228,7 +228,7 @@ export default function QuoteView({
 <style jsx>{`
   .popup {
     position: fixed;
-    top: 20px;
+    top: 60px;
     right: 20px;
     background: #1f1f1f;
     color: white;
