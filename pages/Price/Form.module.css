@@ -255,6 +255,25 @@
   color: #fffefe;
   /*background: rgba(43, 42, 42, 0.276);*/
 }
+.revokebutton 
+{
+  background-color: #e74c3c; /* Red background */
+  color: white;
+  font-weight: bold;
+  font-size: 15px;
+  padding: 8px;
+  border-radius: 10px;
+  cursor: pointer;
+  position: absolute; /* Position the button absolutely */
+  top: 20px; /* Distance from the top of the screen */
+  right: 230px; /* Distance from the right edge of the screen */
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.revokebutton:hover 
+{
+  background-color: #c0392b; /* Darker red on hover */
+}
 .bscbutton 
 {
   background-color: #fff9c4; /* Light yellow */
@@ -295,28 +314,10 @@
   background-color: #ce93d8; /* Darker purple on hover */
 }
 
-.revokebutton 
-{
-  background-color: #e74c3c; /* Red background */
-  color: white;
-  font-weight: bold;
-  font-size: 15px;
-  padding: 8px;
-  border-radius: 10px;
-  cursor: pointer;
-  position: absolute; /* Position the button absolutely */
-  top: 20px; /* Distance from the top of the screen */
-  right: 230px; /* Distance from the right edge of the screen */
-  transition: background-color 0.3s, box-shadow 0.3s;
-}
-
-.revokebutton:hover 
-{
-  background-color: #c0392b; /* Darker red on hover */
-}
-
 .connectwalletbutton 
 {
+  color: white;
+  font-weight: bold;
   position: absolute;
   top: 20px;
   right: 20px;
