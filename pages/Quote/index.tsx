@@ -114,14 +114,16 @@ export default function QuoteView({
       
        
       useEffect(() => {
-        if (transactionData) {
-          setTransactionHash(transactionData.hash);
-        }
-      
-        if (transactionError) {
-          setTransactionStatus('error');
-        }
-      }, [transactionData, transactionError]);
+      if (transactionData?.hash) {
+        setTransactionHash(transactionData.hash);
+        setPopupVisible(true); // show popup immediately
+      }
+    
+      if (transactionError) {
+        setTransactionStatus('error');
+        setPopupVisible(true); // also show on error
+      }
+    }, [transactionData, transactionError]);
       
       const { status, error } = useWaitForTransaction({
         hash: transactionData?.hash,
