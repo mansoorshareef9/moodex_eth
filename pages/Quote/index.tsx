@@ -71,7 +71,7 @@ export default function QuoteView({
   const config = isNativeToken
     ? {
         to: quote?.to,  // 0x Exchange Proxy contract address
-        value: quote?.sellAmount ? BigInt(quote.sellAmount) : undefined, // Set the eth value
+        value: quote?.sellAmount ? BigInt(quote.sellAmount) : 0n, // Set the eth value
         data: quote?.data, // This should contain the correct encoded function call for the swap
       }
     : {
