@@ -228,50 +228,41 @@ export default function QuoteView({
 <style jsx>{`
   .popup {
     position: fixed;
-    top: 10%; /* Positioning towards the top center */
-    left: 89%;
-    transform: translate(-50%, -10%); /* Centering horizontally */
-    width: 20%; /* Adjust width as needed */
-    height: 20%; /* Adjust height as needed */
-    background: rgba(0, 0, 0, 0.7); /* Grey color with slight transparency */
-    padding: 20px;
-    border: 1px solid black;
-    z-index: 1000;
-    border-radius: 15px; /* Rounded corners for smooth look */
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    top: 20px;
+    right: 20px;
+    background: #1f1f1f;
+    color: white;
+    padding: 16px 24px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    z-index: 999;
     display: flex;
-    flex-direction: column; /* Arrange children vertically */
-    justify-content: space-between; /* Space out the content */
-    align-items: center; /* Center content horizontally */
-    text-align: center; /* Center text within the content */
-    backdrop-filter: blur(5px); /* Glossy effect */
-    color: white; /* Make text white */
-  }
-
-  .status {
-    margin-bottom: 10px; /* Add some space below the status message */
-    font-size: 1.2em; /* Increase font size for better visibility */
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
   }
 
   .external-link {
-    color: #f01717; /* Blue color for the link */
-    text-decoration: underline; /* Underline the link */
-    margin-bottom: auto; /* Push the link closer to the top */
-    cursor: pointer; /* Change cursor to pointer on hover */
+    font-size: 16px;
+    color: #4fc3f7;
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
   }
 
   .close-button {
-    margin-top: auto; /* Push the button to the bottom */
-    padding: 5px 10px;
-    background-color: #333; /* Dark background for the button */
-    color: white;
+    align-self: flex-end;
+    padding: 4px 12px;
+    font-size: 14px;
+    background-color: #333;
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
+    color: white;
     cursor: pointer;
   }
 
   .close-button:hover {
-    background-color: #555; /* Slightly lighter background on hover */
+    background-color: #444;
   }
 `}</style>
 
