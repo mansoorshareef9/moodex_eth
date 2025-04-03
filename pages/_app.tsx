@@ -84,6 +84,20 @@ export default function App({ Component, pageProps }: AppProps) {
             <ConnectKitButton />
           </div>
           {mounted && <Component {...pageProps} />}
+          {/* Add the MooDex on POLYGON button */}
+          <button 
+            className={styles.polygonbutton}
+            onClick={() => window.open('https://moodex.xyz', '_blank', 'noopener noreferrer')}
+          >
+            MooDex on POLYGON
+          </button>
+          {/* Add the MooDex on BSC button */}
+          <button 
+            className={styles.bscbutton}
+            onClick={() => window.open('https://bsc.moodex.xyz', '_blank', 'noopener noreferrer')}
+          >
+            MooDex on BSC
+          </button>
           {/* Add the Revoke Permission button outside of the popup */}
           <button 
             className={styles.revokebutton}
