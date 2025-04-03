@@ -208,19 +208,16 @@ export default function QuoteView({
       </button>
       </form>
 
-      {popupVisible && (
+      {popupVisible && transactionHash && (
   <div className="popup">
-    <p className="status">
-      {transactionStatus === 'pending' && 'Transaction is pending...'}
-      {transactionStatus === 'success' && 'Transaction successful!'}
-      {transactionStatus === 'error' && 'Transaction failed. Please try again.'}
-      {transactionStatus === 'rejected' && 'Transaction was rejected by the user.'}
-    </p>
-    {(transactionStatus === 'pending' || transactionStatus === 'success') && transactionHash && (
-      <a href={`https://etherscan.io/tx/${transactionHash}`} target="_blank" rel="noopener noreferrer" className="external-link">
-        Transaction Hash
-      </a>
-    )}
+    <a
+      href={`https://bscscan.com/tx/${transactionHash}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="external-link"
+    >
+      View Transaction ↗
+    </a>
     <button className="close-button" onClick={handleClose}>Close</button>
   </div>
 )}
