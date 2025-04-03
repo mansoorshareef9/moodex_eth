@@ -106,32 +106,27 @@ const { data: buyRawBalance, error: buyBalanceError  } = useContractRead({
   chainId: 1,
   enabled: !!takerAddress && !!selectedBuyToken && !selectedBuyToken.isNative,
 });
-
+/*
   useEffect(() => {
   if (sellBalanceError) console.error("Sell Balance Error:", sellBalanceError);
   if (buyBalanceError) console.error("Buy Balance Error:", buyBalanceError);
 }, [sellBalanceError, buyBalanceError]);
-
+*/
   
 //
   //click on balance amount
   const handleBalanceClick = () => {
-  if (sellRawBalance) {
-    const fullBalance = formatUnits(sellRawBalance, ETH_TOKENS_BY_SYMBOL[sellToken].decimals);
-    setSellAmount(fullBalance); 
+  const decimals = ETH_TOKENS_BY_SYMBOL[sellToken].decimals;
+
+  if (ETH_TOKENS_BY_SYMBOL[sellToken].isNative && sellNativeBalance) {
+    const fullBalance = formatUnits(sellNativeBalance.value, decimals);
+    setSellAmount(fullBalance);
+  } else if (sellRawBalance) {
+    const fullBalance = formatUnits(sellRawBalance, decimals);
+    setSellAmount(fullBalance);
   }
 };
-/*
-  useEffect(() => {
-  console.log("Sell Token:", sellToken);
-  console.log("Sell Token Address:", sellToken === "eth" ? "native" : ETH_TOKENS_BY_SYMBOL[sellToken]?.address);
-  console.log("Sell Token Balance Response:", sellRawBalance);
-}, [sellRawBalance, sellToken]);
 
-  useEffect(() => {
-  console.log("takerAddress:", takerAddress);
-}, [takerAddress]);
-*/
 
   const toggleTokens = () => {
     // Swap tokens and amounts
@@ -190,9 +185,11 @@ const { data: buyRawBalance, error: buyBalanceError  } = useContractRead({
 
 
 const disabled =
-  sellRawBalance && sellAmount
-    ? parseUnits(sellAmount, sellTokenDecimals) > BigInt(sellRawBalance)
-    : !sellRawBalance || !sellAmount || isNaN(Number(sellAmount));
+  selectedSellToken.isNative
+    ? !sellNativeBalance || !sellAmount || parseUnits(sellAmount, sellTokenDecimals) > sellNativeBalance.value
+    : sellRawBalance && sellAmount
+      ? parseUnits(sellAmount, sellTokenDecimals) > BigInt(sellRawBalance)
+      : !sellRawBalance || !sellAmount || isNaN(Number(sellAmount));
 
 
   // Format and round the balances to 1 decimal place
