@@ -196,11 +196,16 @@ export default function QuoteView({
           </div>
         </div>
         <button
-          className={styles.button}
-          onClick={handlePlaceOrder}
-        >
-          Swap
-        </button>
+        className={styles.button}
+        onClick={handlePlaceOrder}
+        disabled={transactionStatus === 'pending' || transactionStatus === 'success'}
+      >
+        {transactionStatus === 'pending' && "Swapping..."}
+        {transactionStatus === 'success' && "Swap Completed"}
+        {transactionStatus === 'error' && "Swap Failed"}
+        {transactionStatus === 'rejected' && "Swap Rejected"}
+        {transactionStatus === 'idle' && "Swap"}
+      </button>
       </form>
 
       {popupVisible && (
