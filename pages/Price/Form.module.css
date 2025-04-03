@@ -255,6 +255,45 @@
   color: #fffefe;
   /*background: rgba(43, 42, 42, 0.276);*/
 }
+.bscbutton 
+{
+  background-color: #fff9c4; /* Light yellow */
+  color: black;
+  font-weight: bold;
+  font-size: 15px;
+  padding: 8px;
+  border-radius: 10px;
+  cursor: pointer;
+  position: absolute; 
+  top: 20px; 
+  right: 440px; 
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.bscbutton:hover 
+{
+  background-color: #fef08a; /* Slightly darker yellow */
+}
+
+.polygonbutton 
+{
+  background-color: #e1bee7; /* Light purple background */
+  color: black;
+  font-weight: bold;
+  font-size: 15px;
+  padding: 8px;
+  border-radius: 10px;
+  cursor: pointer;
+  position: absolute; 
+  top: 20px; 
+  right: 650px; 
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.polygonbutton:hover 
+{
+  background-color: #ce93d8; /* Darker purple on hover */
+}
 
 .revokebutton 
 {
