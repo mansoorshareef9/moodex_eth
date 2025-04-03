@@ -210,7 +210,7 @@ export default function QuoteView({
       </button>
       </form>
 
-      {popupVisible && transactionHash && (
+      {transactionHash && (
   <div className="popup">
     <a
       href={`https://bscscan.com/tx/${transactionHash}`}
