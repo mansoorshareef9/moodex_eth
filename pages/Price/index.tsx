@@ -61,8 +61,8 @@ export default function PriceView({
   const [sellAmount, setSellAmount] = useState("");
   const [buyAmount, setBuyAmount] = useState("");
   const [tradeDirection, setTradeDirection] = useState("sell");
-  const [sellToken, setSellToken] = useState("usdc");
-  const [buyToken, setBuyToken] = useState("usdt");
+  const [sellToken, setSellToken] = useState("eth");
+  const [buyToken, setBuyToken] = useState("pepe");
 
   const handleSellTokenChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setSellToken(e.target.value);
