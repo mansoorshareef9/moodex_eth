@@ -87,14 +87,14 @@ export default function App({ Component, pageProps }: AppProps) {
           {/* Add the MooDex on POLYGON button */}
           <button 
             className={styles.polygonbutton}
-            onClick={() => window.open('https://moodex.xyz', '_blank', 'noopener noreferrer')}
+            onClick={() => window.location.href = 'https://moodex.xyz'}
           >
              🟣 MooDex (Polygon)
           </button>
           {/* Add the MooDex on BSC button */}
           <button 
             className={styles.bscbutton}
-            onClick={() => window.open('https://bsc.moodex.xyz', '_blank', 'noopener noreferrer')}
+            onClick={() => window.location.href = 'https://bsc.moodex.xyz'}
           >
             🟡 MooDex (BSC)
           </button>
